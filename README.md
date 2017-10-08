@@ -92,6 +92,26 @@ After finding the comment that is being replied to we need to create a new comme
 
 `post.markModified('comments');`
 
+### Authorization
+
+Many actions require a user to be logged in e.g. creating a new post, creating a comment, voting. I handeled this
+in two ways. First by using a class name on the body tag to control the display of the UI e.g. showing and hiding
+the login and sign up links. Or inside a route to prevent creating of posts when no logged in. 
+
+For UI handling see the section above [UI State](#UI-State)
+
+In routes I generally handled this by checking the user token on the request and redirecting to the login route.
+
+```
+const currentUser = req.user;   // get the current user
+let loggedin = "";
+if (currentUser === null) {     // if the user is null 
+  return res.redirect('/login');// redirect to '/login'
+} else {
+  loggedin = "loggedin";
+}
+```
+    
 ## TODO
 
 - Fix up and down votes to handle removing a previous up or down vote before adding a vote. 
