@@ -12,6 +12,8 @@ showing and hiding login and signup, and showing the current menu item.
 
 For example the following applies styles when the body has the class home: 
 
+> public/styles.css
+
 ```
 body.home nav ul li.home { border-bottom: 1px solid #f0f; }
 body.home li.home > a { color: #f0f; }
@@ -22,6 +24,8 @@ the template.
 
 This was not as DRY as could be, probably could be refactored in the future. 
 Here the home route adds the class `home` and also adds the class `loggedin` when the a user is logged in. 
+
+> controllers/posts.js
 
 ```app.get('/', (req, res) => {
   const currentUser = req.user; // Get a user
@@ -41,6 +45,8 @@ Here the home route adds the class `home` and also adds the class `loggedin` whe
 ```
 
 The Main Template uses: 
+
+> views/layouts/main.hbs
 
 ```
 ...
