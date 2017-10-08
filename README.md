@@ -88,6 +88,8 @@ After finding the comment that is being replied to we need to create a new comme
 
 **It was import to make the post as modified to make sure Mongoose saved the deeply nested documents**
 
+> controllers/posts.js
+
 `post.markModified('comments');`
 
 ## TODO
