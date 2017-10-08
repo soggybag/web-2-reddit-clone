@@ -54,3 +54,46 @@ The Main Template uses:
 ...
 ```
 
+### Voting
+
+Voting is handled via AJAX by calling a route via JavaScript. 
+
+- Be sure to import jQuery to handle sending AJAX messages. I included jQuery in the `views/layouts.main.hbs`
+
+At the moment voting is calculated by keeping an array of up votes and down votes. When a user up votes a post
+their user id is added to the `upVotes` array and removed from the `downVotes` array on that post object. 
+The vote score is calculated by subtracting the count of down votes from the up votes. 
+
+This means once you have voted you can't be neutral! You have a vote in either up or down. Ideally if you had 
+up voted a post and then down voted your up vote would be removed and not down vote would be added. 
+
+### Comments
+
+Posts store comment objects in a `comments` array. 
+
+Comments also store comments in a `comments` array. For this to work I needed to find the existing nested comment. 
+This happens here: 
+
+> controllers/replies.js
+
+`app.post('/posts/:postId/comments/:commentId/replies', (req, res, next) => {`
+
+This route takes in a post id and a comment id. It needs to find a comment by id which can be deeply nested in 
+the post's comment array. 
+
+_I wrote a recursive function to do this. There must be a better way._
+
+After finding the comment that is being replied to we need to create a new comment and add it to that comment's 
+`comments` array. 
+
+**It was import to make the post as modified to make sure Mongoose saved the deeply nested documents**
+
+`post.markModified('comments');`
+
+## TODO
+
+- Fix up and down votes to handle removing a previous up or down vote before adding a vote. 
+- Show vote status for posts. Up vote would highlight up vote button. Could be handled with a class!
+- Show vote score in post template. 
+- Improve search for nested comment id when adding replies. 
+
