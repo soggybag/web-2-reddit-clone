@@ -1,0 +1,67 @@
+// Import dependancies
+const chai = require('chai');
+const chaiHTTP = require('chai-http');
+const mongoose = require('mongoose');
+
+// Import local files
+const Post = require('../models/post');
+
+const should = chai.should();
+const expect = chai.expect;
+
+// Set Promise for mongoose
+mongoose.Promise = global.Promise;
+
+chai.use(chaiHTTP);
+
+
+// Front End tests
+
+describe('Testing Posts', () => {
+
+  // Before running these test we will need a vald user.
+  // Runs before all tests in this block
+  before(function (done) {
+    // agent
+    //   .post('/login')
+    //   .send({ username: "testone", password: "password" })
+    //   .end(function (err, res) {
+    //     done();
+    //   });
+  });
+
+  // Runs before EACH test in this block
+  beforeEach(() => {
+
+  });
+
+  // After these tests we need to remove test items from the database
+  after(() => {
+
+  });
+
+  // Runs after EACH test in this block
+  afterEach(()=>{
+
+  });
+
+  it("Should return an array of posts", (done) => {
+    chai.request('localhost:3000')
+      .get('/posts')
+      .end((err, res) => {
+        if (err) {
+          console.log("Index test get / err");
+        }
+        res.status.should.be.equal(200);
+        done();
+    });
+  });
+
+  // it('Should create post with valid properties', (done) => {
+  //   const p = new Post({
+  //     title: "Post Title",
+  //     content: "Post content",
+  //     category: "post-category"
+  //   });
+  // });
+});

@@ -1,0 +1,40 @@
+
+<article>
+  <header>
+    <h3>{{post.title}}</h3>
+    <small class="post-meta">
+      Posted by: <a href="/user/{{post.author.username}}">{{post.author.username}}</a>
+      Created: {{formatDate post.createdAt}}
+      Last updated: {{formatDate post.updatedAt}}</small>
+      <p>Posted in Category: <a href="/n/{{post.category}}">{{post.category}}</a></p>
+  </header>
+
+  <p><strong>Content:</strong></p>
+
+  <pre>{{post.content}}</pre>
+
+  <form class="post-vote post-vote-up" data-id="{{post._id}}">
+    <button type="submit">Vote Up</button>
+  </form>
+  <form class="post-vote post-vote-down" data-id="{{post._id}}">
+    <button type="submit">Vote Down</button>
+  </form>
+
+  <div class="post-comment">
+    <!-- Post Comment form -->
+    <form action="/post/{{post._id}}/comments" method="post">
+      <p><strong>Reply with a comment</strong></p>
+      <textarea name="postContent" placeholder="Comment"></textarea>
+      <p class="form-submit-container"><input type="submit" /></p>
+    </form>
+  </div>
+
+  <div class="post-comments">
+    <!-- Use #each to display HTML or a partial for each item in an array -->
+    {{#each post.comments}}
+      {{> comment}}
+    {{/each}}
+  </div>
+</article>
+
+<small class="debug">Template: post.hbs</small>

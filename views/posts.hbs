@@ -1,0 +1,17 @@
+
+<ul class="posts-list">
+  <!-- For #each post... -->
+  {{#each posts}}
+    <li>
+      <h3><a href="/post/{{this._id}}">{{this.title}}</a></h3>
+      <h4><a href="/n/{{this.category}}">{{this.category}}</a></h4>
+      <small class="post-meta">Posted by:
+        <a href="/user/{{this.author.username}}">{{this.author.username}}</a>
+        Created: {{formatDate this.createdAt}}
+        Last updated: {{formatDate this.updatedAt}}</small>
+      <div>{{this.content}}</div>
+    </li>
+  {{/each}}
+</ul>
+
+<small class="debug">Template: posts.hbs</small>

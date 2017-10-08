@@ -1,0 +1,29 @@
+
+<header>
+  <!-- use this partial template in any other template -->
+  <div class="header">
+
+    <div class="header-title">
+      <h1>{{pageTitle}}</h1>
+    </div>
+
+    <div class="header-nav">
+      <nav>
+        <ul>
+          <li class="home"><a href="/">Home</a></li>
+          <li class="posts"><a href="/posts">Posts</a></li>
+          <!-- Use #if to add some logic to a template or partial -->
+          {{#if currentUser}}
+            <!-- Show the Login and Post New only if logged in -->
+            <li class="post-new"><a href="/posts/new">Posts New</a></li>
+            <li class="logout"><a href="/logout">Logout</a></li>
+          {{else}}
+            <!-- Show Login and Sign Up only if NOT logged in -->
+            <li class="login"><a href="/login">Login</a></li>
+            <li class="sign-up"><a href="/sign-up">Sign Up</a></li>
+          {{/if}}
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>

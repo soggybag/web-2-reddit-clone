@@ -1,0 +1,16 @@
+<ul>
+  <li class="comment">
+    <small class="post-meta">Posted by:
+      <a href="/user/{{this.author._id}}">{{this.authorName}}</a>
+    </small>
+
+    <p>Content: {{this.content}} </p>
+    <p>
+      <a href="/posts/{{this.postId}}/comments/{{this._id}}/replies/new">Reply</a>
+    </p>
+
+    {{#each this.comments}}
+      {{> comment}}
+    {{/each}}
+  </li>
+</ul>
