@@ -98,7 +98,7 @@ Many actions require a user to be logged in e.g. creating a new post, creating a
 in two ways. First by using a class name on the body tag to control the display of the UI e.g. showing and hiding
 the login and sign up links. Or inside a route to prevent creating of posts when no logged in. 
 
-For UI handling see the section above [UI State](#UI-State)
+For UI handling see the section above [UI State](#UIState)
 
 In routes I generally handled this by checking the user token on the request and redirecting to the login route.
 
