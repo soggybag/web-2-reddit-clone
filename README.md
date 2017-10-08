@@ -106,9 +106,10 @@ Posts store comment objects in a `comments` array.
 Comments also store comments in a `comments` array. For this to work I needed to find the existing nested comment. 
 This happens here: 
 
-> controllers/replies.js
-
-`app.post('/posts/:postId/comments/:commentId/replies', (req, res, next) => {`
+```
+// controllers/replies.js
+app.post('/posts/:postId/comments/:commentId/replies', (req, res, next) => {
+```
 
 This route takes in a post id and a comment id. It needs to find a comment by id which can be deeply nested in 
 the post's comment array. 
@@ -120,9 +121,10 @@ After finding the comment that is being replied to we need to create a new comme
 
 **It was import to make the post as modified to make sure Mongoose saved the deeply nested documents**
 
-> controllers/posts.js
-
-`post.markModified('comments');`
+```
+// controllers/posts.js
+post.markModified('comments');
+```
 
 ### Authorization
 
@@ -135,6 +137,7 @@ For UI handling see the section above [UI State](#UIState)
 In routes I generally handled this by checking the user token on the request and redirecting to the login route.
 
 ```
+// controllers/posts.js
 const currentUser = req.user;   // get the current user
 let loggedin = "";
 if (currentUser === null) {     // if the user is null 
