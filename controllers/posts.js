@@ -203,7 +203,7 @@ module.exports = (app) => {
     Post.findById(req.params.id).then((post) => {
       post.downVotes.pull(user._id);
       post.upVotes.addToSet(user._id);
-      post.voteScore = post.upVotes.length - post.downVotes.length;
+      post.voteTotal = post.upVotes.length - post.downVotes.length;
 
       post.save();
 
@@ -222,7 +222,7 @@ module.exports = (app) => {
     Post.findById(req.params.id).then((post) => {
       post.upVotes.pull(user._id);
       post.downVotes.addToSet(user._id);
-      post.voteScore = post.upVotes.length - post.downVotes.length;
+      post.voteTotal = post.upVotes.length - post.downVotes.length;
 
       post.save();
 

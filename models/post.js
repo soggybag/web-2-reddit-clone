@@ -13,7 +13,7 @@ const PostSchema = new Schema({
   author:     { type: Schema.Types.ObjectId, ref: 'user', required: true },
   upVotes:    [ String ], // [{ type: Schema.Types.ObjectId, ref: 'user', required: true }],
   downVotes:  [{ type: Schema.Types.ObjectId, ref: 'user', required: true }],
-  voteTotal:  { type: Number }
+  voteTotal:  { type: Number, default: 0 }
 });
 
 // Use a regular function here to avoid issues with this!

@@ -45,9 +45,6 @@ module.exports = function(app) {
       const findComment = (id, comments) => {
         if (comments.length > 0) {
           for (var index = 0; index < comments.length; index++) {
-            // console.log(id, comments[index]._id);
-            // console.log(id == comments[index]._id);
-            // console.log(typeof id, typeof comments[index]._id);
             const comment = comments[index];
             if (comment._id == id) {
               console.log(">>> FOUND <<<<");
