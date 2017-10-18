@@ -19,7 +19,7 @@ const expressValidator = require('express-validator');
 // --------------------------------------------------------
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/redditclone', { useMongoClient: true });
-mongoose.connection.on('error', console.error.bind(console, 'MongoDB connection Error:'))
+mongoose.connection.on('error', console.error.bind(console, 'MongoDB connection Error:'));
 // mongoose.set('debug', true);
 
 // --------------------------------------------------------

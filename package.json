@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "nodemon --exec 'mocha --recursive --timeout 100000'",
+    "test": "mocha **/*.test.js",
+    "test-watch": "nodemon --exec 'npm test'",
+    "test1": "nodemon --exec 'mocha --recursive --timeout 100000'",
     "test2": "mocha --timeout 10000"
   },
   "author": "",

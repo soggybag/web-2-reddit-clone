@@ -1,0 +1,159 @@
+/*
+
+This example uses chai with chaiHTTP to test actual routes defined in
+your express app.
+
+*/
+
+const chai      = require('chai');      // Import chai
+const chaiHTTP  = require('chai-http'); // Import chaiHTTP
+const app       = require('../server'); // Import server.js
+const expect    = chai.expect;          // define expect
+const should    = chai.should();        // define should
+
+chai.use(chaiHTTP);                         // Tell chai to user chaiHTTP
+
+const agent   = chai.request.agent(app);    // set the request agent to use your express app
+
+const User    = require('../models/user');  // Import User model
+const Post    = require('../models/post');  // Import Post Model
+
+// Describe your tests
+describe('Server Test:', function() {
+  // I wanted to set up some documents first so I defined some values that
+  // I cna use within this block.
+  const testUsername      = "testUsername";
+  const testPassword      = "testPassword";
+  const testPostTitle     = "Test Post title";
+  const testPostContent   = "Test Post Content";
+  const testPostCategory  = "test post category";
+
+  // We will be creating a mock user and a post for testing. Defining them
+  // scopes them to this describe block.
+  let testUser;
+  let testPost;
+
+  // Before running the tests create a mock user and mock post.
+  before(() => {
+    // Create a new mock User.
+    return new User({ username: testUsername, password: testPassword }).save().then((user) => {
+      testUser = user; // Set the testUser
+      // Create a new mock Post
+      return new Post({
+        title: testPostTitle,
+        content: testPostContent,
+        author: testUser,
+        category: testPostCategory }).save();
+    }).then((post) => {
+      testPost = post;  // set the testPost
+    })
+  })
+
+  // Describe a block of tests within this block.
+  describe('Testing routes', () => {
+
+    // test a route exists.
+    it('Test route get /', (done) => {
+      // Use the agent to call a route in the express app
+      agent.get('/').end((err, res) => {
+        res.should.have.status(200);
+        done();
+      })
+    });
+
+    // Test /posts route
+    it('Test route get /posts', (done) => {
+      // Check another route
+      agent.get('/posts').end((err, res) => {
+        res.should.have.status(200);
+        done();
+      })
+    });
+
+    // Test /post/:id route looking for testPost
+    it('Test route get /post/:id', (done) => {
+      // This route requires an id as a param. Use the mock post for this.
+      agent.get(`/post/${testPost._id}`).end((err, res) => {
+        res.should.have.status(200);
+        done();
+      })
+    });
+
+    // Test the /user/:username route looking for the testUser
+    it('Test route get /user/:username', (done) => {
+      // This route requires an id as a param. Use the mock post for this.
+      agent.get(`/user/${testUser._id}`).end((err, res) => {
+        res.should.have.status(200);
+        done();
+      })
+    });
+  });
+
+  // Should not be able to log in. This test sends form data to simulate
+  // logging in.
+  it('Should not be able to login with wrong user name and password', (done) => {
+    agent
+      .post('/login')               // Post to the /login route
+      .type('form')                 // set the type to form
+      .send({                       // Send some data
+        username: "wrongusername",  // Match these to named for elements
+        password: "wrongpassword"
+      })
+      .end((err, res) => {                // Check the response 
+        res.status.should.be.equal(401);
+        done();
+      });
+  });
+
+
+  // after(function(done) {
+  //   User.findOne({ username: testUsername }).then((user) => {
+  //     return User.findByIdAndRemove(user._id);
+  //   }).then(() => {
+  //     done();
+  //   })
+  // });
+
+  // signup
+  // it('Should be able to signup', function(done) {
+  //   agent
+  //     .post('/sign-up')
+  //     .type('form')
+  //     .send({
+  //       postUsername: testUsername,
+  //       postPassword: testPassword,
+  //       postPasswordConfirm: testPassword
+  //     })
+  //     .end(function(err, res) {
+  //       if (err) {
+  //         return done(err);
+  //       }
+  //       res.should.have.status(200);
+  //       res.should.have.cookie("nToken");
+  //       done();
+  //     });
+  // });
+
+  // login
+  // it('should be able to logout', function (done) {
+  //  agent
+  //    .get('/logout')
+  //    .end(function (err, res) {
+  //      res.should.have.status(200);
+  //      res.should.not.have.cookie("nToken");
+  //      done();
+  //    });
+  // });
+
+  // login
+  // it('should be able to login', function (done) {
+  //  agent
+  //    .post('/login')
+  //    .send({ email: "username", password: "password" })
+  //    .end(function (err, res) {
+  //      res.should.have.status(200);
+  //      res.should.have.cookie("nToken");
+  //      done();
+  //    });
+  // });
+});

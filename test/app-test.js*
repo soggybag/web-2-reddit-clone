@@ -8,7 +8,7 @@ chai.use(chaiHTTP);
 const agent = chai.request.agent(app);
 
 
-describe("Testing App", () => {
+describe("Testing Server", () => {
   it('Can get /api', (done) => {
     agent
       .get('/api')

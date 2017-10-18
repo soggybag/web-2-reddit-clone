@@ -1,5 +1,6 @@
 body, html {
   height: 100%;
+  margin: 0;
 }
 
 body {
@@ -147,6 +148,13 @@ body.login nav ul li.login { border-bottom: 1px solid #f0f; }
 body.login li.login > a { color: #f0f; }
 body.sign-up nav ul li.sign-up { border-bottom: 1px solid #f0f; }
 body.sign-up li.sign-up > a { color: #f0f; }
+
+/*
+body.loggedin li.login { display: none; }
+body.loggedin li.sign-up { display: none; }
+body.loggedin li.logout { display: inline-block; }
+body:not(.loggedin) li.logout { display: none; }
+*/
 
 /* Footer */
 .footer {

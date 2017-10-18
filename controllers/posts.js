@@ -66,15 +66,19 @@ module.exports = (app) => {
     if (currentUser !== null) {
       loggedin = "loggedin"
     }
-    Post.findById(id)
-      /*.populate({
+      Post.findById(id)
+        /*
+
+      .populate({
         path: 'comments',
         model: 'comment',
         populate: {
           path: 'author',
           model: 'user'
         }
-      })*/
+      })
+
+      */
       // .populate('comments.author')
       // .populate({path:"comment.author", model: 'user'})
       .populate('author')
@@ -207,7 +211,7 @@ module.exports = (app) => {
 
       post.save();
 
-      res.status(200).send({ voteScore: post.voteScore });
+      res.status(200).json({ voteScore: post.voteScore });
     }).catch((err) => {
       console.log(err);
     });
@@ -226,7 +230,7 @@ module.exports = (app) => {
 
       post.save();
 
-      res.status(200).send({ voteScore: post.voteScore });
+      res.status(200).json({ voteScore: post.voteScore });
     }).catch((err) => {
       console.log(err);
     });
