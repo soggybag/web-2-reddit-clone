@@ -1,4 +1,31 @@
+
+// var addTransferButtons = document.querySelector('.add-to-transfer');
+// for (var i in addTransferButtons) {
+//   addTransferButtons[i].onclick = function(e) {
+//     // find el
+//     el.classList.toggle('selected');
+//   }
+// }
+
 $(document).ready(function() {
+  /*
+    li.record-item
+      div.record-name
+      a.add-to-transfer
+  */
+
+  $('body').on('click', '.add-to-transfer', function(e) {
+    e.preventDefault();
+    $(this).siblings('.record-name').toggleClass('selected');
+  });
+
+  // You migght also want to include the id in the hash at the end of the url
+  // for the link
+
+  $('body').on('click', 'a.add-to-transfer',function(e) {
+    alert(this.hash.substr(1));
+  });
+
 
   $('body').on('submit', '.vote-up', function(e){
     e.preventDefault();

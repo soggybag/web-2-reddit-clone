@@ -2,7 +2,6 @@
 const express = require('express');
 const { check, validationResult } = require('express-validator/check'); // import check, validationResult
 const { matchedData } = require('express-validator/filter');            // matched data
-// const router = express.Router();
 
 const Post = require('../models/post');
 const User = require('../models/user');
@@ -22,7 +21,9 @@ module.exports = (app) => {
       message = `Welcome back ${currentUser.username}`;
       loggedin = "loggedin"
     }
+
     res.render('home.hbs', {
+      ...req.user,
       bodyClass: `home ${loggedin}`,
       pageTitle: "Home",
       currentUser,
@@ -43,6 +44,7 @@ module.exports = (app) => {
         loggedin = "loggedin"
       }
       res.render('posts.hbs', {
+        ...req.user,
         bodyClass: `posts ${loggedin}`,
         pageTitle: "Posts",
         posts,
@@ -86,6 +88,7 @@ module.exports = (app) => {
       const currentUser = req.user;
 
       res.render('post.hbs', {
+        ...req.user,
         bodyClass: `post ${loggedin}`,
         pageTitle: "Post",
         post
@@ -106,6 +109,7 @@ module.exports = (app) => {
     }
 
     res.render('posts-new.hbs', {
+      ...req.user,
       bodyClass: `post-new ${loggedin}`,
       pageTitle: "Posts New",
       currentUser
@@ -117,6 +121,7 @@ module.exports = (app) => {
   / Get posts in category
   /
   /*********************************************/
+
   app.get('/n/:category', (req, res) => {
     const category = req.params.category;
     const currentUser = req.user;
@@ -127,6 +132,7 @@ module.exports = (app) => {
     Post.find({ category }).then((posts) => {
       const currentUser = req.user;
       res.render('posts', {
+        ...req.user,
         bodyClass: `category ${category} ${loggedin}`,
         pageTitle: `Posts: ${category}`,
         posts,

@@ -41,16 +41,17 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(expressValidator()); // Add after Body parser!
 
 // Auth middleware
-app.use((req, res, next) => {
+const checkauth = (req, res, next) => {
   if (typeof req.cookies.nToken === 'undefined' || req.cookies.nToken === null) {
     req.user = null;
   } else {
     const token = req.cookies.nToken;
     const decodedToken = jwt.decode(token, { complete: true }) || {};
-    req.user = decodedToken.payload;
+    req.user = decodedToken.payload; // {  _id, username }
   }
   next();
-});
+}
+app.use(checkauth);
 
 // --------------------------------------------------------
 /** Set templating with handlebars */

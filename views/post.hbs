@@ -1,26 +1,29 @@
 
 <article>
   <header>
-    <h3>{{post.title}}</h3>
-    <small class="post-meta">
-      Posted by: <a href="/user/{{post.author.username}}">{{post.author.username}}</a>
-      Created: {{formatDate post.createdAt}}
-      Last updated: {{formatDate post.updatedAt}}</small>
-      <p>Posted in Category: <a href="/n/{{post.category}}">{{post.category}}</a></p>
+    <h3 class="post-title">{{post.title}}</h3>
   </header>
 
-  <p><strong>Content:</strong></p>
+  <div class="post-content">{{post.content}}</div>
 
-  <pre>{{post.content}}</pre>
+  <div class="post-vote-buttons">
+    <form class="post-vote post-vote-up" data-id="{{post._id}}">
+      <button type="submit">Vote Up</button>
+    </form>
+    <form class="post-vote post-vote-down" data-id="{{post._id}}">
+      <button type="submit">Vote Down</button>
+    </form>
+  </div>
 
-  <form class="post-vote post-vote-up" data-id="{{post._id}}">
-    <button type="submit">Vote Up</button>
-  </form>
-  <form class="post-vote post-vote-down" data-id="{{post._id}}">
-    <button type="submit">Vote Down</button>
-  </form>
+  <div>
+    <small class="post-meta">
+    Posted by: <a href="/user/{{post.author.username}}">{{post.author.username}}</a>
+    Created: {{formatDate post.createdAt}}
+    Last updated: {{formatDate post.updatedAt}}</small>
+  </div>
+  <p>Posted in Category: <a href="/n/{{post.category}}">{{post.category}}</a></p>
 
-  <div class="post-comment">
+  <div class="post-comment only-when-logged-in">
     <!-- Post Comment form -->
     <form action="/post/{{post._id}}/comments" method="post">
       <p><strong>Reply with a comment</strong></p>

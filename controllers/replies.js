@@ -2,7 +2,7 @@ const Post = require('../models/post');
 const Comment = require('../models/comment');
 const User = require('../models/user');
 
-module.exports = function(app) {
+module.exports = (app) => {
 
   // Show the reply to comment form.
   app.get('/posts/:postId/comments/:commentId/replies/new', (req, res) => {
@@ -21,6 +21,7 @@ module.exports = function(app) {
     // TODO: Prevent post if not logged in...
 
     res.render('replies-new', {
+      ...req.user,
       bodyClass: "reply",
       pageTitle: "Reply to comment:",
       postId,

@@ -6,6 +6,7 @@ module.exports = (app) => {
     User.findOne({ username }).then((user) => {
       console.log(user);
       res.render('profile', {
+        ...req.user,
         bodyClass: "profile",
         pageTitle: "User Profile",
         user

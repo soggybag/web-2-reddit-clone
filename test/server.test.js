@@ -3,6 +3,8 @@
 This example uses chai with chaiHTTP to test actual routes defined in
 your express app.
 
+ Promise.all([p1, p2, p3]).then()
+
 */
 
 const chai      = require('chai');      // Import chai
@@ -99,7 +101,7 @@ describe('Server Test:', function() {
         username: "wrongusername",  // Match these to named for elements
         password: "wrongpassword"
       })
-      .end((err, res) => {                // Check the response 
+      .end((err, res) => {                // Check the response
         res.status.should.be.equal(401);
         done();
       });

@@ -13,7 +13,7 @@ describe('site', () => {                  // Describe what you are testing
       .get('/')
       .end((err, res) => {
         if (err) {
-          // console.log("Index test get / err");
+          done(err);
         }
         res.status.should.be.equal(200);
         done();                           // Call done if the test completed successfully.

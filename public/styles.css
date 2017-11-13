@@ -7,8 +7,8 @@ body {
   font-family: Helvetica;
   font-size: 18px;
   line-height: 1.5em;
-  color: #666;
-  background-color: #eee;
+  color: #949494;
+  background-color: #f7f7f7;
   font-weight: lighter;
 }
 
@@ -26,6 +26,9 @@ pre {
   height: 100%;
 }
 
+.main {
+  flex: 1;
+}
 
 /* Comment */
 .comment {
@@ -85,13 +88,34 @@ form > p {
 
 }
 
-a {
-  color: #000;
+a:link {
+  font-weight: normal;
+  color: #6d6d6d;
   text-decoration: none;
+}
+
+h1 a:link, h2 a:link, h3 a:link, h4 a:link, h5 a:link, h6 a:link {
+  font-weight: bold;
+}
+
+a:visited {
+  color: #6d6d6d;
 }
 
 a:hover {
   color: #f0f;
+}
+
+
+.post-title {
+  margin: 1em 0 0.25em 0;
+  border-bottom: 1px #ddd solid
+}
+
+.post-content {
+  color: #222;
+  font-weight: normal;
+  margin-bottom: 1em;
 }
 
 .post-vote {
@@ -99,6 +123,14 @@ a:hover {
   display: inline-block;
 }
 
+.post-vote-buttons {
+  display: none;
+}
+
+/* <body class="loggedin"> ... <button class="post-vote-buttons"> */
+body.loggedin .post-vote-buttons {
+  display: block;
+}
 
 /* Header */
 
@@ -108,7 +140,6 @@ a:hover {
   flex: 1;
   justify-content: space-between;
   align-items: flex-end;
-  background-color: #efefef;
   border-bottom: solid 1px #ddd;
 }
 
@@ -140,26 +171,31 @@ nav ul li {
 
 body.home nav ul li.home { border-bottom: 1px solid #f0f; }
 body.home li.home > a { color: #f0f; }
+
 body.posts nav ul li.posts { border-bottom: 1px solid #f0f; }
 body.posts li.posts > a { color: #f0f; }
+
 body.post-new nav ul li.post-new { border-bottom: 1px solid #f0f; }
 body.post-new li.post-new > a { color: #f0f; }
+
 body.login nav ul li.login { border-bottom: 1px solid #f0f; }
 body.login li.login > a { color: #f0f; }
+
 body.sign-up nav ul li.sign-up { border-bottom: 1px solid #f0f; }
 body.sign-up li.sign-up > a { color: #f0f; }
 
-/*
 body.loggedin li.login { display: none; }
 body.loggedin li.sign-up { display: none; }
+
 body.loggedin li.logout { display: inline-block; }
 body:not(.loggedin) li.logout { display: none; }
-*/
+
+body.loggedin .only-when-logged-in { display: auto }
+body:not(.loggedin) .only-when-logged-in { display: none; }
 
 /* Footer */
 .footer {
   border-top: solid 1px #ddd;
-  background-color: #efefef;
   font-size: 0.75em;
 }
 
