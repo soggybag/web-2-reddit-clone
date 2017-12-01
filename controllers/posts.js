@@ -129,6 +129,7 @@ module.exports = (app) => {
     if (currentUser !== null) {
       loggedin = "loggedin"
     }
+
     Post.find({ category }).then((posts) => {
       const currentUser = req.user;
       res.render('posts', {

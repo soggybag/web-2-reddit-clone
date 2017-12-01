@@ -30,6 +30,7 @@ UserSchema.pre('save', function(next) {
   });
 });
 
+// Must use function style function to bind this.password! 
 UserSchema.methods.comparePassword = function(password, done) {
   bcrypt.compare(password, this.password, (err, isMatch) => {
     done(err, isMatch);
