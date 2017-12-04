@@ -61,6 +61,14 @@ input[type=submit], button[type=submit] {
   width: 100%;
 }
 
+input[placeholder] {} /* <input placeholder="user name" /> */
+input[placeholder='user name'] {} /* <input placeholder="user name" /> */
+a[href] {}
+a[href='google.com'] {}
+div[data-id] {}
+
+  
+
 input[type=submit]:hover, button[type=submit]:hover {
   background-color: #f0f;
 }
