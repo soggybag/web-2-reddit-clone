@@ -1,0 +1,6 @@
+module.exports = {
+  pi: 3.14,
+  circleArea: function(radius) {
+    return this.pi * radius * radius
+  }
+}

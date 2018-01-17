@@ -67,7 +67,7 @@ a[href] {}
 a[href='google.com'] {}
 div[data-id] {}
 
-  
+
 
 input[type=submit]:hover, button[type=submit]:hover {
   background-color: #f0f;

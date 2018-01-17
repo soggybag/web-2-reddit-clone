@@ -1,0 +1,33 @@
+<div>
+  <script>
+      <!-- For #each post... -->
+      {{#each posts}}
+        <li>
+          <h3 class="post-title"><a href="/post/{{this._id}}">{{this.title}}</a></h3>
+
+          <div class="post-content">{{this.content}}</div>
+
+          <div>
+            <small class="post-meta">Posted by:
+              <a href="/user/{{this.author.username}}">{{this.author.username}}</a>
+              Created: {{formatDate this.createdAt}}
+              Last updated: {{formatDate this.updatedAt}}</small>
+            </div>
+          <div>
+            <small>In category: <a href="/n/{{this.category}}">{{this.category}}</a></small>
+          </div>
+        </li>
+      {{/each}}
+  </script>
+
+<p>Posts...</p>
+<ul class="posts-list">
+  <!-- Put some posts here -->
+</ul>
+
+<small class="debug">Template: posts-api.hbs</small>
+</div>
+
+<script>
+
+</script>

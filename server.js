@@ -8,24 +8,21 @@ require('dotenv').config(); // npm install --save dotenv
 // --------------------------------------------------------
 const jwt = require('jsonwebtoken');                  // *** use json web token
 const express = require('express');
-const exphbs = require('express-handlebars');         // Import express handlebar
-const mongoose = require('mongoose');                 // Run: $ mongod
+const exphbs = require('express-handlebars');         // Import express handlebar                 // Run: $ mongod
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');        // *** Use cookie parser
 const expressValidator = require('express-validator');
 
-// --------------------------------------------------------
-/** Set up mongoose and connect to database */
-// --------------------------------------------------------
-mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost/redditclone', { useMongoClient: true });
-mongoose.connection.on('error', console.error.bind(console, 'MongoDB connection Error:'));
-// mongoose.set('debug', true);
+const serverDb = require('./server-db')
+
 
 // --------------------------------------------------------
 /** Start Express */
 // --------------------------------------------------------
 const app = express();
+
+// Check the environment
+const isDevelopment  = app.get('env') !== "production";
 
 // --------------------------------------------------------
 /** Setup middleware */
@@ -92,14 +89,21 @@ require('./controllers/auth')(app);
 require('./controllers/user')(app);
 require('./controllers/replies')(app);
 
+require('./controllers/posts-api')(app);
+
 // --------------------------------------------------------
 /** Start the app */
 // --------------------------------------------------------
 // app.listen(3000, () => {
 //   console.log('Server is running on port 3000');
 // });
+
+const DEFAULT_PORT = 3000;
+
+app.set("port", process.env.PORT || DEFAULT_PORT);
+
 if (!module.parent) {
-  app.listen(3000, () => {
+  app.listen(app.get("port"), () => {
     console.log('Server is running on port 3000');
   });
 }

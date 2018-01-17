@@ -1,5 +1,157 @@
 # Reddit Clone - Notes
 
+## Making the Reddit api
+
+This section will look at building an API into the Reddit Project that
+delivers JSON.
+
+### Designing the API
+
+Creating a well planned API will make all of your other work easier. While
+you aren't writing code at this step you are planning the code you will write
+and this is what makes this step important!
+
+Design your routes. The route itself should describe what the action is, what
+is returned, and what parameters are expected.
+
+What does the API need to support? The API you write needs to:
+
+- Return all posts
+- Return all posts in a reddit/category
+- Return a single post
+- Create a new post
+- Vote a post up
+- Vote a post down
+- Comment to post
+- Reply to comment
+- Login
+- Logout
+- Signup
+
+**Challenge**
+
+Write your API. Include the following:
+
+- Route - The route: /api/posts
+- REST verb - A REST verb: POST
+- Action - The Action: Gets all posts
+- Description - Returns an array of all most recent posts
+
+**Stretch Challenge**
+
+Add routes for the following:
+
+- Return posts in a range starting at an index to an index
+- Return posts by user
+- Edit post
+- Delete post
+- Posts count
+
+Take a look at the real Reddit API for inspiration. Keep in mind that this API
+much larger than the API you are creating.
+
+- https://www.reddit.com/dev/api/
+
+### Routes
+
+Your routes
+
+| Route                    | REST   | Action | Description                  |
+|--------------------------|--------|--------|------------------------------|
+| /api/posts               | GET    | Get    | Gets Posts                   |
+| /api/posts/:id           | GET    | Get    | Get a single post with an id |
+| /api/posts/edit/:id      | PUT    | Update | Edit a post                  |
+| /api/posts/delete/:id    | DELETE | Destroy | Delete a post             |
+| /api/post/new            | POST   | Create | Create a new post            |
+| /api/posts/category/:category     | GET    | Get    | Get posts in category        |
+| /api/posts/vote-up/:id   | PUT    | update | Update vote for post id      |
+| /api/posts/vote-down/:id | PUT    | update | Update vote for post id      |
+| /api/user/:id            | GET    | Get    | Returns a user profile for id |
+| /api/login               | POST   | Post   | Login post `username` and `password` |
+| /api/logout              | POST   | Post   | Logout                       |
+| /api/signup              | POST   | Create | Sing up post `username`, `password`, `email` |
+| /api/comment/new         | POST   | Create | Create a new comment on a post post `content`, `postId` |
+| /api/comment/reply       | POST   | Create | Create a new reply to a comment `content`, `postId`, `commentId` |
+
+### Create the routes for the api
+
+Write the route handlers for each of the routes you defined.
+
+```JavaScript
+// Get Posts
+app.get('/api/posts', (req, res) => {
+
+});
+
+// Get single post
+app.get('/api/posts/:id', (req, res) => {
+
+});
+
+// Edit post
+app.put('/api/posts/edit/:id', (req, res) => {
+
+});
+
+// Delete post
+app.delete('/api/posts/delete/:id', (req, res) => {
+
+});
+
+// New post
+app.post('/api/posts/new', (req, res) => {
+
+});
+
+// Get Posts in category
+app.get('/api/posts/:category', (req, res) => {
+
+});
+
+// Vote Post up
+app.put('/api/posts/vote-up/:id', (req, res) => {
+
+});
+
+// Vote Post down
+app.put('/api/posts/vote-down/:id', (req, res) => {
+
+});
+
+// Comment new on post
+app.post('/api/comment/new', (req, res) => {
+
+});
+
+// Comment new reply
+app.post('/api/comment/reply', (req, res) => {
+
+});
+
+// Log in
+app.post('/api/login', (req, res) => {
+
+});
+
+// Log out
+app.post('/api/logout', (req, res) => {
+
+});
+
+// Sign up
+app.post('/api/signup', (req, res) => {
+
+});
+```
+
+### Testing Routes
+
+Write tests for each route. Your initial tests should all fail. Your job is to make all of the tests pass.
+
+
+
+---
+
 ## Testing
 
 The goal of testing is to define software tests that will app will have to

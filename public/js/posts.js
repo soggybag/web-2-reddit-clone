@@ -56,7 +56,9 @@ $(document).ready(function() {
   $('.post-vote-down').submit(function (e) {
     e.preventDefault();
 
-    var postId = $(this).data('id');
+    var postId = $(this).data('id'); // data-id
+    // $(this).attr('data-id')
+
     $.ajax({
       type: 'PUT',
       url: '/posts/' + postId + '/vote-down',

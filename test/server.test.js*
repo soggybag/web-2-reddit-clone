@@ -3,8 +3,6 @@
 This example uses chai with chaiHTTP to test actual routes defined in
 your express app.
 
- Promise.all([p1, p2, p3]).then()
-
 */
 
 const chai      = require('chai');      // Import chai

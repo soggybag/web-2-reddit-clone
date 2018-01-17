@@ -45,7 +45,7 @@ module.exports = (app) => {
       }
       res.render('posts.hbs', {
         ...req.user,
-        bodyClass: `posts ${loggedin}`,
+        bodyClass: `posts ${req.user ? "loggedin" : ""}`,
         pageTitle: "Posts",
         posts,
         currentUser
@@ -102,8 +102,9 @@ module.exports = (app) => {
   app.get('/posts/new', (req, res) => {
     const currentUser = req.user;
     let loggedin = "";
+
     if (currentUser === null) {
-      return res.redirect('/login');
+      return res.redirect('/login')
     } else {
       loggedin = "loggedin";
     }
@@ -208,17 +209,19 @@ module.exports = (app) => {
   app.put('/posts/:id/vote-up', (req, res) => {
     const user = req.user;
     if (user === null) {
+      // FIXME: Send not login error
       return;
     }
 
     Post.findById(req.params.id).then((post) => {
+      // FIXME: do not up vote if already down voted
       post.downVotes.pull(user._id);
       post.upVotes.addToSet(user._id);
       post.voteTotal = post.upVotes.length - post.downVotes.length;
 
-      post.save();
-
-      res.status(200).json({ voteScore: post.voteScore });
+      return post.save(); // FIXME: return promise
+    }).then((post) => {
+      res.status(200).json({ voteScore: post.voteTotal });
     }).catch((err) => {
       console.log(err);
     });
@@ -237,7 +240,7 @@ module.exports = (app) => {
 
       post.save();
 
-      res.status(200).json({ voteScore: post.voteScore });
+      res.status(200).json({ voteScore: post.voteTotal });
     }).catch((err) => {
       console.log(err);
     });
