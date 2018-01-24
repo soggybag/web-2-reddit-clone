@@ -16,7 +16,8 @@ const PostSchema = new Schema({
   voteTotal:  { type: Number, default: 0 }
 });
 
-// Use a regular function here to avoid issues with this!
+// Use a regular function here to avoid issues with this! () => {} DOES NOT bind this
+
 PostSchema.pre('save', function(next) {
   const date = new Date();
   this.updatedAt = date;

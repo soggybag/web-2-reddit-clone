@@ -1,5 +1,7 @@
 // api-route.test.js
 
+// npm run test-watch
+
 const app       = require('../server'); // Import server.js
 const chai      = require('chai');      // Import chai
 const chaiHTTP  = require('chai-http'); // Import chaiHTTP
