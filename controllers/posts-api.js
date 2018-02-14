@@ -1,9 +1,11 @@
 // Validate your forms with express-validator
-const express = require('express');
-const jwt = require('jsonwebtoken');
+const express = require('express')
+const jwt = require('jsonwebtoken')
 
-const Post = require('../models/post');
-const User = require('../models/user');
+const Post = require('../models/post')
+const User = require('../models/user')
+
+const { getPosts, getPost, removePost } = require('./post-methods')
 
 // Notes:
 // https://nordicapis.com/best-practices-api-error-handling/
@@ -14,10 +16,9 @@ const handleError = (res, status, message) => {
 }
 
 module.exports = (app) => {
-
   // Get Posts
   app.get('/api/posts', (req, res) => {
-    Post.find().then((posts) => {
+    getPosts().then((posts) => {
       res.status(200).json(posts)
     }).catch((err) => {
       // TODO: Errors need developement
@@ -29,8 +30,7 @@ module.exports = (app) => {
 
   // Get single post
   app.get('/api/posts/:id', (req, res) => {
-    const { id } = req.params
-    Post.findById(id).then((post) => {
+    getPost(req.params.id).then((post) => {
       res.status(200).json(post)
     }).catch((err) => {
       // TODO: Errors need developement
@@ -49,7 +49,7 @@ module.exports = (app) => {
   app.delete('/api/posts/delete/:id', (req, res) => {
     const { _id } = req.params
     const { user } = req
-    Post.remove({ _id, author: user }).then((post) => {
+    removePost({ _id, author: user }).then((post) => {
       res.status(200).json({})
     }).catch((err) => {
       res.json(err)

@@ -11,7 +11,7 @@ const PostSchema = new Schema({
   category:   { type: String, required: true },
   comments:   [Comment.schema],
   author:     { type: Schema.Types.ObjectId, ref: 'user', required: true },
-  upVotes:    [ String ], // [{ type: Schema.Types.ObjectId, ref: 'user', required: true }],
+  upVotes:    [{ type: Schema.Types.ObjectId, ref: 'user', required: true }],
   downVotes:  [{ type: Schema.Types.ObjectId, ref: 'user', required: true }],
   voteTotal:  { type: Number, default: 0 }
 });

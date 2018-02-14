@@ -201,6 +201,18 @@ body:not(.loggedin) li.logout { display: none; }
 body.loggedin .only-when-logged-in { display: auto }
 body:not(.loggedin) .only-when-logged-in { display: none; }
 
+/* ************************************************************* */
+
+body:not(.loggedin) some-selector {
+  /* Applies when the body does NOT have the loggedin class  */
+}
+
+body.loggedin some-selector {
+  /* Applies when the body has logged in class */
+}
+
+/* ************************************************************* */
+
 /* Footer */
 .footer {
   border-top: solid 1px #ddd;

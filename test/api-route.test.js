@@ -8,9 +8,9 @@ const chaiHTTP  = require('chai-http'); // Import chaiHTTP
 const expect    = chai.expect;          // define expect
 const should    = chai.should();        // define should
 
-chai.use(chaiHTTP);                         // Tell chai to user chaiHTTP
+chai.use(chaiHTTP);                     // Tell chai to user chaiHTTP
 
-const agent   = chai.request.agent(app);    // set the request agent to use your express app
+const agent = chai.request.agent(app);  // set the request agent to use your express app
 
 const User = require('../models/user');
 const Post = require('../models/post');
@@ -34,6 +34,7 @@ describe('Testing API', () => {
     .end((err, res) => {
       done(err)
     })
+    // done()
   })
 
   // After tests run clean up. This removes all of the
@@ -47,6 +48,13 @@ describe('Testing API', () => {
   });
 
   // Run Tests
+
+  it('should get the home page', (done) => {
+    agent.get('/').end((err, res) => {
+      res.should.have.status(200)
+      done(err)
+    })
+  })
 
   // Get posts
   it('Should return an array of posts', (done) => {
@@ -141,10 +149,7 @@ describe('Testing API', () => {
     })
   })
 
-  it('Should sign up user with name and password', () => {
-
-  })
-
+  it('Should sign up user with name and password')
   it('Should logout')
   it('Should return status ??? on a failed login')
   it('Should return status ??? when creating a post when not logged in')

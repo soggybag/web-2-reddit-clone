@@ -11,9 +11,10 @@ const express = require('express');
 const exphbs = require('express-handlebars');         // Import express handlebar                 // Run: $ mongod
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');        // *** Use cookie parser
+
 const expressValidator = require('express-validator');
 
-const serverDb = require('./server-db')
+require('./server-db')
 
 
 // --------------------------------------------------------
@@ -43,6 +44,7 @@ const checkauth = (req, res, next) => {
     req.user = null;
   } else {
     const token = req.cookies.nToken;
+
     const decodedToken = jwt.decode(token, { complete: true }) || {};
     req.user = decodedToken.payload; // {  _id, username }
   }
@@ -98,9 +100,10 @@ require('./controllers/posts-api')(app);
 //   console.log('Server is running on port 3000');
 // });
 
-const DEFAULT_PORT = 3000;
+// const DEFAULT_PORT = 3000;
 
-app.set("port", process.env.PORT || DEFAULT_PORT);
+app.set("port", process.env.PORT);
+app.set("port", 3000);
 
 if (!module.parent) {
   app.listen(app.get("port"), () => {
@@ -108,5 +111,10 @@ if (!module.parent) {
   });
 }
 
-
 module.exports = app; // Export app
+
+
+
+
+
+//

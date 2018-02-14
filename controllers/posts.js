@@ -6,6 +6,8 @@ const { matchedData } = require('express-validator/filter');            // match
 const Post = require('../models/post');
 const User = require('../models/user');
 
+const { getPosts, getPost } = require('./post-methods')
+
 module.exports = (app) => {
 
   /**********************************************
@@ -16,11 +18,14 @@ module.exports = (app) => {
   app.get('/', (req, res) => {
     const currentUser = req.user;
     let message = "";
-    let loggedin = "";
+    let loggedin = "loggedout";
+
     if (currentUser !== null) {
       message = `Welcome back ${currentUser.username}`;
       loggedin = "loggedin"
     }
+
+    // res.cookie('hello', 'Hello Cookie!');
 
     res.render('home.hbs', {
       ...req.user,
@@ -37,6 +42,10 @@ module.exports = (app) => {
   /
   /*********************************************/
   app.get('/posts', (req, res) => {
+
+    // res.cookie('hello', 'Hello Cookie!');
+    // res.send(req.cookies.bar);
+
     Post.find({}).populate('author').then((posts) => {
       const currentUser = req.user;
       let loggedin = "";
@@ -68,23 +77,8 @@ module.exports = (app) => {
     if (currentUser !== null) {
       loggedin = "loggedin"
     }
-      Post.findById(id)
-        /*
 
-      .populate({
-        path: 'comments',
-        model: 'comment',
-        populate: {
-          path: 'author',
-          model: 'user'
-        }
-      })
-
-      */
-      // .populate('comments.author')
-      // .populate({path:"comment.author", model: 'user'})
-      .populate('author')
-      .then((post) => {
+    getPost(id).then((post) => {
       const currentUser = req.user;
 
       res.render('post.hbs', {
@@ -159,6 +153,7 @@ module.exports = (app) => {
     // Check user redirect if not logged in
     const currentUser = req.user;
     let loggedin = "";
+
     if (currentUser === null) {
       return res.redirect('/login');
     } else {
@@ -213,10 +208,12 @@ module.exports = (app) => {
       return;
     }
 
+
     Post.findById(req.params.id).then((post) => {
       // FIXME: do not up vote if already down voted
       post.downVotes.pull(user._id);
       post.upVotes.addToSet(user._id);
+      // FIXME: refactor as external methods
       post.voteTotal = post.upVotes.length - post.downVotes.length;
 
       return post.save(); // FIXME: return promise

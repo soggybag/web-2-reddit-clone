@@ -17,8 +17,8 @@ const salt = 'secret-code';
 
 // 3) Make a token - A token is made of the data and hash+salt
 const token = {
-data,
-  hash: SHA256(JSON.stringify(data) + salt).toString()
+  data: data,
+  hash: SHA256( JSON.stringify(data) + salt ).toString()
 }
 
 /*
@@ -44,6 +44,8 @@ function verify(token) {
   // If they do not match there is a problem
   return "Token failed verification";
 }
+
+
 
 // 5) Verify the token.
 console.log(verify(token));

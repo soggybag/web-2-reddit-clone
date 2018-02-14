@@ -3,32 +3,72 @@
   <head>
     <title></title>
   </head>
-  <body>
+  <body class="">
+    <!-- Page Header -->
     <div>
       <h1>API Test Page</h1>
+      <ul>
+        <li><a class="nav-link" href="#show-posts">Posts</a></li>
+        <li><a class="nav-link" href="#post-details">Details</a></li>
+        <li><a class="nav-link" href="#about">About</a></li>
+      </ul>
     </div>
+
+    <!-- Posts -->
     <div id="show-posts" class="posts-container">
       <!-- Show Posts -->
     </div>
 
+    <!-- Post Details -->
+    <div id="post-details" class="post-details-container">
+      <!-- Show Posts -->
+    </div>
+
+    <div id="about" class="about-container">
+      <h1>About</h1>
+    </div>
+
     <!-- ************************** -->
+
+    <!-- Import libraries -->
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="js/handlebars-v4.0.11.js"></script>
-    <script id="entry-template" type="text/x-handlebars-template">
+
+    <!-- ************************** -->
+
+    <!-- Templates -->
+
+    <!-- Block Element Modifier -->
+
+    <!-- Post template -->
+    <script id="post-template" type="text/x-handlebars-template">
       <div class="post">
-        <h1>{{title}}</h1>
+        <h1 class="post-title">
+          <a class="post-link" href=`/post-detail.html?id={{_id}}`>
+            {{title}}
+          </a>
+        </h1>
+        <small class="post-meta">Created at:{{createdAtDate}} updated at:{{updatedAtDate}}</small>
+      </div>
+    </script>
+
+    <!-- Post Detail template -->
+    <script id="post-detail-template" type="text/x-handlebars-template">
+      <div class="post">
+        <h1 class="post-title">{{title}}</h1>
+        <small class="post-meta">Created at:{{createdAtDate}} updated at:{{updatedAtDate}}</small>
         <div class="post-body">
           <div>
             {{content}}
           </div>
-          <small>Created at:{{createdAtDate}} updated at:{{updatedAtDate}}</small>
         </div>
       </div>
     </script>
 
     <script>
-      const post_template = Handlebars.compile(document.getElementById("entry-template").innerHTML);
+      const post_template = Handlebars.compile(document.getElementById("post-template").innerHTML);
+      const post_detail_template = Handlebars.compile(document.getElementById("post-detail-template").innerHTML);
     </script>
 
     <script src="js/main-api.js"></script>

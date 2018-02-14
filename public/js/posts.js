@@ -40,6 +40,8 @@ $(document).ready(function() {
     // $.get('/path', {a:12, b:23}, function(data){})
     // $.post('/path', {a:12}, function(data){})
 
+    console.log('/posts/' + postId + '/vote-up')
+
     $.ajax({
       type: 'PUT',
       url: '/posts/' + postId + '/vote-up',
