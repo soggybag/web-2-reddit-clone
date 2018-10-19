@@ -15,19 +15,19 @@
     "bcrypt": "*",
     "body-parser": "*",
     "cookie-parser": "*",
-    "dotenv": "^4.0.0",
-    "express": "^4.16.4",
-    "express-handlebars": "^3.0.0",
-    "express-validator": "^4.1.1",
+    "dotenv": "^6.1.0",
+    "express": "*",
+    "express-handlebars": "*",
+    "express-validator": "^5.3.0",
     "hbs": "*",
-    "jsonwebtoken": "^8.0.1",
-    "mongodb": "^3.1.8",
-    "mongoose": "^5.3.4",
-    "supertest": "^3.3.0"
+    "jsonwebtoken": "*",
+    "mongodb": "*",
+    "mongoose": "*",
+    "supertest": "*"
   },
   "devDependencies": {
-    "chai": "^4.2.0",
-    "chai-http": "^3.0.0",
-    "mocha": "^3.5.3"
+    "chai": "*",
+    "chai-http": "^4.2.0",
+    "mocha": "^5.2.0"
   }
 }
