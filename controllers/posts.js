@@ -169,12 +169,12 @@ module.exports = (app) => {
       return res.status(422).json({ errors: errors.mapped() });
     }
 
-    const review = new Review(req.body);
-    review.save().then((review) => {
-      res.redirect('/')
-    }).catch((err) => {
-      console.log(err.message)
-    })
+    // const review = new Review(req.body);
+    // review.save().then((review) => {
+    //   res.redirect('/')
+    // }).catch((err) => {
+    //   console.log(err.message)
+    // })
 
 
     // Render when no errors.

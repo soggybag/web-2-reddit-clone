@@ -12,20 +12,21 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "bcrypt": "^1.0.3",
-    "body-parser": "^1.18.1",
-    "cookie-parser": "^1.4.3",
+    "bcrypt": "*",
+    "body-parser": "*",
+    "cookie-parser": "*",
     "dotenv": "^4.0.0",
-    "express": "^4.15.4",
+    "express": "^4.16.4",
     "express-handlebars": "^3.0.0",
     "express-validator": "^4.1.1",
-    "hbs": "^4.0.1",
+    "hbs": "*",
     "jsonwebtoken": "^8.0.1",
-    "mongoose": "^4.11.11",
-    "supertest": "^3.0.0"
+    "mongodb": "^3.1.8",
+    "mongoose": "^5.3.4",
+    "supertest": "^3.3.0"
   },
   "devDependencies": {
-    "chai": "^4.1.2",
+    "chai": "^4.2.0",
     "chai-http": "^3.0.0",
     "mocha": "^3.5.3"
   }
