@@ -14,6 +14,7 @@ describe("Testing Server", () => {
       .get('/api')
       .end((err, res) => {
         if (err) return done(err);
+        // Not a completed test
         res.body.hello.should.be.equal("world");
         done();
       })

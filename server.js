@@ -112,3 +112,26 @@ if (!module.parent) {
 }
 
 module.exports = app; // Export app
+
+// module.exports = { p1: 1, p2: 2, p3: 3 }
+
+// -------------
+
+// const v1 = 55
+// const v2 = () => { }
+// module.exports.v1 = v1
+// module.exports.v2 = v2
+
+// const app = reqiure('./server.js')
+// const { v1, v2, v3 } = app
+
+
+// ES6
+// const v1 = 55
+// const v2 = () => { }
+// export v1
+// export v2
+// export default app
+
+// // --------
+// import app, { v1, v2 } from './server.js'
